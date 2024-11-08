@@ -1,0 +1,13 @@
+{
+  "clangd.arguments": [
+    "--inlay-hints=0",
+    "--header-insertion=never"
+  ],
+  "inlayHint.enable": false,
+    "snippets.ultisnips.directories": ["UltiSnips"], // Adjust this if your snippets are in another directory
+  "suggest.noselect": false,                       // Optional: Choose to auto-select snippet completions
+  "coc.source.ultisnips.priority": 9               // Optional: Set a higher priority for snippets
+}
+
+
+
