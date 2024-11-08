@@ -18,7 +18,7 @@ Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
 
 let $FZF_DEFAULT_COMMAND = 'find . -type f ! -executable'
-let g:python3_host_prog = '~/.venvs/nvim/bin/python'
+let g:python3_host_prog = '~/.venvs/nvim/bin/python' "we have to make a python virtual enviorment with python3 -m venv myenv and then source it with source myenv/bit/activate"
 let g:sonokai_transparent_background=1
 colorscheme sonokai
 
