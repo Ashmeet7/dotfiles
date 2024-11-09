@@ -1,12 +1,9 @@
+
 call plug#begin()
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'nvim-lualine/lualine.nvim'
-Plug 'nvim-neo-tree/neo-tree.nvim'
-Plug 'lewis6991/gitsigns.nvim'
-Plug 'romgrk/barbar.nvim'
-Plug 'nvim-tree/nvim-web-devicons'
+Plug 'nvim-lua/plenary.nvim',
 Plug 'MunifTanjim/nui.nvim',
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-neo-tree/neo-tree.nvim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
@@ -18,15 +15,8 @@ Plug 'sainnhe/sonokai'
 Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
 
-augroup BarbarHighlight
-  autocmd!
-  autocmd ColorScheme * highlight BufferCurrent guibg=NONE
-  autocmd ColorScheme * highlight BufferVisible guibg=NONE
-  autocmd ColorScheme * highlight BufferInactive guibg=NONE
-  autocmd ColorScheme * highlight BufferTabpageFill guibg=NONE
-augroup END
 let $FZF_DEFAULT_COMMAND = 'find . -type f ! -executable'
-let g:python3_host_prog = '~/.venvs/nvim/bin/python' "we have to make a python virtual enviorment with python3 -m venv myenv and then source it with source myenv/bit/activate"
+let g:python3_host_prog = '~/.venvs/nvim/bin/python'
 let g:sonokai_transparent_background=1
 colorscheme sonokai
 
@@ -55,7 +45,6 @@ if has("autocmd")
 endif
 
 let mapleader=" "
-nmap <silent> gh :call CocActionAsync('doHover')<CR>
 nnoremap <c-f> :<c-f>
 vnoremap <C-c> ::w !clip.exe<CR><CR>
 inoremap jk <ESC>
@@ -122,10 +111,19 @@ else
   inoremap <silent><expr> <c-@> coc#refresh()
 endif
 
+nnoremap <silent> gh :call ShowDocumentation()<CR>
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('gh', 'in')
+  endif
+endfunction
 
 "fuzzy finder
 " Search files with <Leader>f
@@ -154,47 +152,6 @@ require'nvim-treesitter.configs'.setup {
   }
 }
 
-require('lualine').setup {
-  options = {
-    icons_enabled = true,
-    theme = 'auto',
-    component_separators = { left = '', right = ''},
-    section_separators = { left = '', right = ''},
-    disabled_filetypes = {
-      statusline = {},
-      winbar = {},
-    },
-    ignore_focus = {},
-    always_divide_middle = true,
-    always_show_tabline = true,
-    globalstatus = false,
-    refresh = {
-      statusline = 1000,
-      tabline = 1000,
-      winbar = 1000,
-    }
-  },
-  sections = {
-    lualine_a = {'mode'},
-    lualine_b = {'branch', 'diff', 'diagnostics'},
-    lualine_c = {'filename'},
-    lualine_x = {'encoding', 'fileformat', 'filetype'},
-    lualine_y = {'progress'},
-    lualine_z = {'location'}
-  },
-  inactive_sections = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = {'filename'},
-    lualine_x = {'location'},
-    lualine_y = {},
-    lualine_z = {}
-  },
-  tabline = {},
-  winbar = {},
-  inactive_winbar = {},
-  extensions = {}
-}
 require("neo-tree").setup({
     -- Add your desired configuration here
     window = {
