@@ -35,12 +35,12 @@ set termguicolors
 set noswapfile
 set noerrorbells
 set belloff=all
-set tabstop=4 softtabstop=4
+set tabstop=2 softtabstop=2
 set smartindent
 set smarttab
 set autoindent
 set cindent
-set shiftwidth=4
+set shiftwidth=2
 set expandtab
 set relativenumber
 set number
