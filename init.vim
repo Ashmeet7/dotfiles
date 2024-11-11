@@ -13,18 +13,12 @@ Plug 'preservim/nerdcommenter'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'sainnhe/sonokai'
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
 
-autocmd ColorScheme sonokai highlight TabLine guibg=NONE ctermbg=NONE
-autocmd ColorScheme sonokai highlight TabLineSel guibg=NONE ctermbg=NONE
-autocmd ColorScheme sonokai highlight TabLineFill guibg=NONE ctermbg=NONE
-highlight Normal guibg=NONE ctermbg=NONE
 let $FZF_DEFAULT_COMMAND = 'find . -type f ! -executable'
 let g:python3_host_prog = '~/.venvs/nvim/bin/python'
-let g:sonokai_transparent_background=1
-colorscheme sonokai
 set laststatus=0
 
 syntax on
@@ -166,5 +160,9 @@ require("neo-tree").setup({
     },
 })
 
-EOF
+require("catppuccin").setup({
+  transparent_background=true
+})
 
+EOF
+colorscheme catppuccin-frappe
