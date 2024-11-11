@@ -5,7 +5,6 @@ Plug 'lewis6991/gitsigns.nvim'
 Plug 'romgrk/barbar.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-neo-tree/neo-tree.nvim'
-Plug 'nvim-lualine/lualine.nvim'
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -14,16 +13,19 @@ Plug 'preservim/nerdcommenter'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
+Plug 'sainnhe/sonokai'
 Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
 
+autocmd ColorScheme sonokai highlight TabLine guibg=NONE ctermbg=NONE
+autocmd ColorScheme sonokai highlight TabLineSel guibg=NONE ctermbg=NONE
+autocmd ColorScheme sonokai highlight TabLineFill guibg=NONE ctermbg=NONE
 highlight Normal guibg=NONE ctermbg=NONE
-highlight TabLine guibg=NONE ctermbg=NONE
-highlight TabLineSel guibg=NONE ctermbg=NONE
-highlight TabLineFill guibg=NONE ctermbg=NONE
 let $FZF_DEFAULT_COMMAND = 'find . -type f ! -executable'
 let g:python3_host_prog = '~/.venvs/nvim/bin/python'
+let g:sonokai_transparent_background=1
+colorscheme sonokai
+set laststatus=0
 
 syntax on
 set termguicolors
@@ -84,7 +86,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:UltiSnipsSnippetDirectories=["~/UltiSnips"]
 
 
-"nerdtree
+"neotree
 nnoremap <leader>e :Neotree<CR>
 nnoremap <C-e> :Neotree toggle<CR>
 
@@ -164,53 +166,5 @@ require("neo-tree").setup({
     },
 })
 
-require("catppuccin").setup({
-  transparent_background=true,   
-})
-
-require('lualine').setup {
-  options = {
-    icons_enabled = true,
-    theme = 'catppuccin',
-    component_separators = { left = '', right = ''},
-    section_separators = { left = '', right = ''},
-    disabled_filetypes = {
-      statusline = {},
-      winbar = {},
-    },
-    ignore_focus = {},
-    always_divide_middle = true,
-    always_show_tabline = true,
-    globalstatus = false,
-    refresh = {
-      statusline = 100,
-      tabline = 100,
-      winbar = 100,
-    }
-  },
-  sections = {
-    lualine_a = {'mode'},
-    lualine_b = {'branch', 'diff', 'diagnostics'},
-    lualine_c = {'filename'},
-    lualine_x = {'encoding', 'fileformat', 'filetype'},
-    lualine_y = {'progress'},
-    lualine_z = {'location'}
-  },
-  inactive_sections = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = {'filename'},
-    lualine_x = {'location'},
-    lualine_y = {},
-    lualine_z = {}
-  },
-  tabline = {},
-  winbar = {},
-  inactive_winbar = {},
-  extensions = {}
-}
-
 EOF
-colorscheme catppuccin-frappe
-
 
